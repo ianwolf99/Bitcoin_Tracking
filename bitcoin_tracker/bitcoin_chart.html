@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bitcoin Chart</title>
+    <style>
+        .chart-container {
+            width: 800px;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bitcoin Charts</h1>
+
+    <h2>Line Chart</h2>
+    <div class="chart-container">
+        <canvas id="line-chart"></canvas>
+    </div>
+
+    <h2>Bar Chart</h2>
+    <div class="chart-container">
+        <canvas id="bar-chart"></canvas>
+    </div>
+
+    <h2>Scatter Chart</h2>
+    <div class="chart-container">
+        <canvas id="scatter-chart"></canvas>
+    </div>
+
+    <h2>Pie Chart</h2>
+    <div class="chart-container">
+        <canvas id="pie-chart"></canvas>
+    </div>
+
+    <h2>Area Chart</h2>
+    <div class="chart-container">
+        <canvas id="area-chart"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var lineCtx = document.getElementById('line-chart').getContext('2d');
+            var barCtx = document.getElementById('bar-chart').getContext('2d');
+            var scatterCtx = document.getElementById('scatter-chart').getContext('2d');
+            var pieCtx = document.getElementById('pie-chart').getContext('2d');
+            var areaCtx = document.getElementById('area-chart').getContext('2d');
+
+            var dates = {{ dates }};
+            var bitcoinPrices = {{ bitcoin_prices }};
+
+            // Line Chart
+            var lineData = {
+                labels: dates,
+                datasets: [{
+                    label: 'Bitcoin Closing Prices',
+                    data: bitcoinPrices,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            };
+
+            var lineOptions = {
+                scales: {
+                    x: {
+                        type: 'time',
+                        time: {
+                            unit: 'day'
+                        }
+                    },
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            };
+
+            var lineChart = new Chart(lineCtx, {
+                type: 'line',
+                data: lineData,
+                options: lineOptions
+            });
+
+            // Bar Chart
+            var barData = {
+                labels: dates,
+                datasets: [{
+                    label: 'Bitcoin Closing Prices',
+                    data: bitcoinPrices,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            };
+
+            var barOptions = {
+                scales: {
+                    x: {
+                        type: 'time',
+                        time: {
+                            unit: 'day'
+                        }
+                    },
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            };
+
+            var barChart = new Chart(barCtx, {
+                type: 'bar',
+                data: barData,
+                options: barOptions
+            });
+
+            // Scatter Chart
+            var scatterData = {
+                labels: dates,
+                datasets: [{
+                    label: 'Bitcoin Closing Prices',
+                    data: bitcoinPrices,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            };
+
+            var scatterOptions = {
+                scales: {
+                    x: {
+                        type: 'time',
+                        time: {
+                            unit: 'day'
+                        }
+                    },
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            };
+
+            var scatterChart = new Chart(scatterCtx, {
+                type: 'scatter',
+                data: scatterData,
+                options: scatterOptions
+            });
+
+            // Pie Chart
+            var pieData = {
+                labels: dates,
+                datasets: [{
+                    label: 'Bitcoin Closing Prices',
+                    data: bitcoinPrices,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            };
+
+            var pieOptions = {
+                responsive: true
+            };
+
+            var pieChart = new Chart(pieCtx, {
+                type: 'pie',
+                data: pieData,
+                options: pieOptions
+            });
+
+            // Area Chart
+            var areaData = {
+                labels: dates,
+                datasets: [{
+                    label: 'Bitcoin Closing Prices',
+                    data: bitcoinPrices,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1,
+                    fill: true
+                }]
+            };
+
+            var areaOptions = {
+                scales: {
+                    x: {
+                        type: 'time',
+                        time: {
+                            unit: 'day'
+                        }
+                    },
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            };
+
+            var areaChart = new Chart(areaCtx, {
+                type: 'line',
+                data: areaData,
+                options: areaOptions
+            });
+        });
+    </script>
+</body>
+</html>
